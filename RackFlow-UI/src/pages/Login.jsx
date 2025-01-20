@@ -14,6 +14,14 @@ const Login = ({ onLogin }) => {
     e.preventDefault();
     setError(""); 
 
+    
+
+    if(import.meta.env.MODE == "development"){
+      const userInfo = { username: "Admin", tenant: "W01"};
+      onLogin(userInfo);
+      return
+    } 
+
     try {
       const response = await axios.post("http://127.0.0.1:8000/auth/login", {
         tenantid: tenant,
@@ -21,7 +29,7 @@ const Login = ({ onLogin }) => {
         password: password
       });
 
-      const { access_token, refresh_token, email } = response.data;
+      const { access_token, refresh_token } = response.data;
 
       localStorage.setItem("access_token", access_token);
       localStorage.setItem("refresh_token", refresh_token);

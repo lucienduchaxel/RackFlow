@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import Inventory from "./pages/Inventory";
-import Sidebar, { SidebarItem } from "./components/Sidebar.jsx";
+import Users from "./pages/Users";
+import Sidebar from "./components/Sidebar.jsx";
 import Login from "./pages/Login";
 import { Home as HomeIcon, LayoutDashboard } from "lucide-react";
 import { UserProvider, useUser } from "./contexts/UserContext.jsx";
@@ -34,35 +35,13 @@ function MainApp() {
       ) : (
         <div className="flex h-screen">
           {/* Sidebar */}
-          <Sidebar>
-            <Link to="/">
-              <SidebarItem
-                icon={<HomeIcon size={20} />}
-                text="Dashboard"
-                link="/"
-              />
-            </Link>
-            <Link to="/inventory">
-              <SidebarItem
-                icon={<LayoutDashboard size={20} />}
-                text="Inventory"
-                link="/inventory"
-              />
-            </Link>
-            <Link onClick={logout}>
-              <SidebarItem
-                icon={<LayoutDashboard size={20} />}
-                text="Logout"
-                link="/inventory"
-              />
-            </Link>
-          </Sidebar>
-
+          <Sidebar />
           {/* Main Content */}
           <div className="w-full flex flex-col">
-            <div className="flex-1 bg-gray-100 dark:bg-slate-800 overflow-auto">
+            <div className="flex-1 bg-gray-100 dark:bg-gray-700 overflow-auto">
               <Routes>
                 <Route path="/inventory" element={<Inventory />}></Route>
+                <Route path="/users" element={<Users />}></Route>
               </Routes>
             </div>
           </div>

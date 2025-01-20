@@ -5,7 +5,7 @@ import Button from "../components/Button.jsx";
 const Inventory = () => {
 
   return (
-    <div className="h-full  p-5 dark:bg-slate-800">
+    <div className="h-full  p-5 dark:bg-slate-700">
         <div>
             <h1 className="text-4xl text-blue-500 font-bold">Inventory</h1>
         </div>
