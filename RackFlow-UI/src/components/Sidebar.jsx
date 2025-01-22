@@ -31,6 +31,13 @@ export default function Sidebar() {
         />
         <MenuItem icon={<HomeIcon size={16} />} text="Inventory Adjustment" />
       </MenuDropdown>
+      <MenuDropdown icon={<HomeIcon size={20} />} text="Inbound">
+        <MenuItem
+          icon={<LayoutDashboard size={20} />}
+          text="Reveiving"
+          link="/receiving"
+        />
+      </MenuDropdown>
       <MenuDropdown icon={<HomeIcon size={20} />} text="Maintenance">
         <MenuItem
           icon={<LayoutDashboard size={20} />}

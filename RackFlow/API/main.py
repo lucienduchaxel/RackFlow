@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import auth, inventory
+from routers import auth, inventory, receiving, expreceipt, expreceiptline
 from database import engine
 from models import Base
 
@@ -19,3 +19,7 @@ Base.metadata.create_all(bind=engine)
 # Include routers
 app.include_router(inventory.router)
 app.include_router(auth.router)
+app.include_router(receiving.router)
+app.include_router(expreceipt.router)
+app.include_router(expreceiptline.router)
+

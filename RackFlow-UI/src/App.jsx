@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
 import Inventory from "./pages/Inventory";
 import Users from "./pages/Users";
+import Receiving from "./pages/Receiving/Receiving.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import Login from "./pages/Login";
 import { Home as HomeIcon, LayoutDashboard } from "lucide-react";
@@ -42,6 +43,7 @@ function MainApp() {
               <Routes>
                 <Route path="/inventory" element={<Inventory />}></Route>
                 <Route path="/users" element={<Users />}></Route>
+                <Route path="/receiving" element={<Receiving />}></Route>
               </Routes>
             </div>
           </div>
