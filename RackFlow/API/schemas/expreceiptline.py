@@ -3,8 +3,9 @@ from pydantic import BaseModel
 
 class ExpreceiptlineBase(BaseModel):
     tenant_id: str
-    expreceiptno: str
+    expreceiptno: int
     lineno: int
     itemid: str
     uomcode: str
-    quantity: int
+    quantity: int  
+    quantityreceived: int

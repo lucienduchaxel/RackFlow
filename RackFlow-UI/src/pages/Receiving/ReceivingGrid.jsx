@@ -1,6 +1,8 @@
 import { AgGridReact } from "ag-grid-react";
 import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import { useState, useCallback } from "react";
+import { useUser } from "../../contexts/UserContext.jsx";
+
 import { themeQuartz } from "ag-grid-community";
 
 const myTheme = themeQuartz.withParams({
@@ -13,31 +15,40 @@ const myTheme = themeQuartz.withParams({
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
-const Button = (props) => {
-  return <button className="rounded-md bg-red-600">Receive</button>;
-};
+const ReceivingGrid = ({ showDetails }) => {
+  const [RowData, setRowData] = useState([]);
+  const { user } = useUser();
 
-const ReceivingGrid = () => {
-  const [rowData, setRowData] = useState([
-    { Expreciptno: "1", cust: "ME", price: 64950 },
-    { Expreciptno: "2", cust: "ME", price: 33850 },
-    { Expreciptno: "3", cust: "ME", price: 29600 },
-  ]);
+  const onClickShowDetails = (props) => {
+    return (
+      <button
+        onClick={() => showDetails(props.data)}
+        className="rounded-md bg-red-600"
+      >
+        Details
+      </button>
+    );
+  };
+
+  const onGridReady = useCallback((params) => {
+    fetch(`http://127.0.0.1:8000/expreceipt/tenant=${user.tenant}`)
+      .then((resp) => resp.json())
+      .then((data) => setRowData(data));
+  }, []);
 
   // Column Definitions: Defines the columns to be displayed.
   const [colDefs, setColDefs] = useState([
-    { field: "Expreciptno" },
-    { field: "cust" },
-    { field: "price" },
-    { field: "Action", cellRenderer: Button, headerName: "" },
+    { field: "expreceiptno" },
+    { field: "purchaseorder" },
+    { field: "Action", cellRenderer: onClickShowDetails },
   ]);
 
   return (
-    <div className="w-full h-full">
+    <div className="" style={{ height: "400px", width: "100%" }}>
       <AgGridReact
         columnDefs={colDefs}
         sideBar={"columns"}
-        rowData={rowData}
+        rowData={RowData}
         defaultColDef={{
           flex: 1,
           resizable: true,
@@ -50,7 +61,7 @@ const ReceivingGrid = () => {
           minWidth: 100,
         }}
         theme={myTheme}
-        //onGridReady={onGridReady}
+        onGridReady={onGridReady}
       />
     </div>
   );
