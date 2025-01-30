@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./RackFlow/API
+    container_name: fastapi_container
+    restart: always
+    environment:
+      DATABASE_URL: "postgresql+asyncpg://myuser:mypassword@mydb.xxxxx.us-east-1.rds.amazonaws.com:5432/mydatabase"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - frontend
+
+  frontend:
+    build: ./RackFlow-UI
+    container_name: react_container
+    restart: always
+    ports:
+      - "3000:3000"
+
